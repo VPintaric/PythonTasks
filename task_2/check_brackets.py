@@ -1,5 +1,6 @@
 import argparse
 import sys
+import logging
 
 UNBALANCED_BRACKETS_MSG = "Brackets are unbalanced"
 BALANCED_BRACKETS_MSG = "Brackets are balanced"
@@ -21,6 +22,8 @@ def check_bracket_balance(text):
     return not stack
 
 def main():
+    logging.basicConfig(format="%(levelname)s: %(message)s")
+
     parser = argparse.ArgumentParser(description="""Checks if the braces (\"()\", \"{}\", \"[]\")
                                         in the given input are balanced. Reads input from file if 
                                         file name is given, otherwise reads from standard input.""")
@@ -30,9 +33,13 @@ def main():
     if(args.input_file_name is None):
         f = sys.stdin
     else:
-        f = open(args.input_file_name, "r")
-    text = f.read()
+        try:
+            f = open(args.input_file_name, "r")
+        except IOError:
+            logging.error("Cannot open \"%s\"" % args.input_file_name)
+            return
 
+    text = f.read()
     if(check_bracket_balance(text)):
         print(BALANCED_BRACKETS_MSG)
     else:    
