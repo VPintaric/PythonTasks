@@ -130,9 +130,9 @@ def main():
     passed_tests = 0
     for idx, test in enumerate(TESTS):
         if(not test()):
-            passed_tests += 1
             print("Test %d: FAILED" % idx)
         else:
+            passed_tests += 1
             print("Test %d: PASSED" % idx)
 
     print("Passed tests %d / %d" % (passed_tests, len(TESTS)))
