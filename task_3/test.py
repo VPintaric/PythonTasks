@@ -38,14 +38,14 @@ def test_cache_lifespan():
         return False
 
     return True
-
-"""
-    If the wrapped function is slow there is a possibility that timer
-    is invoked to reset the cache while the function is still executing.
-    Timer would reset the newly created valid cache thinking it reset the old
-    invalid cache.
-"""
 def test_slow_function_short_lifespan():
+    """
+        If the wrapped function is slow there is a possibility that timer
+        is invoked to reset the cache while the function is still executing.
+        Timer would reset the newly created valid cache thinking it reset the old
+        invalid cache.
+    """
+
     FIRST_VAL, SECOND_VAL = 0, 1
     val = FIRST_VAL
     def _slow_func():
@@ -64,14 +64,15 @@ def test_slow_function_short_lifespan():
 
     return True
 
-"""
-    If decorator does not cancel old started timers a lot of timers would
-    be created when the wrapped function is frequently called thus causing
-    a RuntimeError.
-
-    This test should be run last due to a possibility of a crash.
-"""
 def test_frequent_function_long_lifespan():
+    """
+        If decorator does not cancel old started timers a lot of timers would
+        be created when the wrapped function is frequently called thus causing
+        a RuntimeError.
+
+        This test should be run last due to a possibility of a crash.
+    """
+    
     def _frequent_func():
         return 0
 
