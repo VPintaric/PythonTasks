@@ -2,9 +2,6 @@ import argparse
 import sys
 import logging
 
-UNBALANCED_BRACKETS_MSG = "Brackets are unbalanced"
-BALANCED_BRACKETS_MSG = "Brackets are balanced"
-
 def check_bracket_balance(text):
     OPEN_BRACKETS = "([{"
     CLOSE_BRACKETS = ")]}"
@@ -41,9 +38,9 @@ def main():
 
     text = f.read()
     if(check_bracket_balance(text)):
-        print(BALANCED_BRACKETS_MSG)
+        print("Brackets are balanced")
     else:    
-        print(UNBALANCED_BRACKETS_MSG)
+        print("Brackets are unbalanced")
 
     f.close()
 
