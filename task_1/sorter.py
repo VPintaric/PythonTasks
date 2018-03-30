@@ -2,6 +2,20 @@ import tempfile
 import queue
 
 def sort_file(file_name, sort_key=lambda x: x, as_temporary=False, sorted_file_name=None, lines_per_chunk=100000):
+    """
+        Sorts lines of a file using external merge sort.
+
+        Parameters:
+        file_name -- name of the input file
+        sort_key -- function which for the given line of the file returns the key by which to sort
+        as_temporary -- if True the newly created sorted file will be created as a temporary
+        sorted_file_name -- name of the newly created sorted file, ignored if as_temporary is True
+        lines_per_chunk -- size (in lines of text) of chunks of the input file which will be internally sorted
+
+        Returns:
+            handler to the newly created sorted file
+    """
+
     if(lines_per_chunk < 1):
         raise ValueError("lines_per_chunk argument should be an integer greater than 0")
 
